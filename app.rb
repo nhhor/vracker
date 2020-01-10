@@ -9,6 +9,8 @@ also_reload('lib/**/*.rb')
 DB = PG.connect({:dbname => "volunteer_tracker"})
 
 get('/') do
+  # DB.exec('DELETE FROM volunteers *;')
+  # DB.exec('DELETE FROM projects *;')
   @projects = Project.all
   @volunteers = Volunteer.all
   erb(:projects)
@@ -37,8 +39,8 @@ get('/projects/:id') do
 end
 
 post('/projects') do
-  name = params[:project_name]
-  project = Project.new(name, nil, nil, nil, nil)
+  name = params[:project_title]
+  project = Project.new({:title => name, :id => nil})
   project.save()
   @projects = Project.all()
   erb(:projects)
@@ -97,10 +99,14 @@ get('/volunteers/:id/edit') do
 end
 
 post('/volunteers') do
-  name = params[:volunteer_name]
-  @volunteers = Volunteer.new({:name => name, :id => nil})
-  @volunteers.save()
-  redirect to('/volunteers')
+  @name = params[:volunteer_name]
+  @project_id = nil
+
+  volunteer = Volunteer.new({:name => @name, :project_id => @project_id, :id => nil})
+  # biunding.pry
+  volunteer.save()
+  redirect to("/volunteers")
+
 end
 
 post('/volunteers/:id') do
