@@ -50,7 +50,8 @@ _This This repository is copyright (C) 2019 by Noah Horwitz and licensed under t
 
 ## Notes
 psql
-CREATE DATABASE vracker;
-\c vracker;
+CREATE DATABASE volunteer_tracker;
+\c volunteer_tracker;
 CREATE TABLE projects (id serial PRIMARY KEY, title varchar);
 CREATE TABLE volunteers (id serial PRIMARY KEY, name varchar, project_id varchar);
+CREATE DATABASE volunteer_tracker_test WITH TEMPLATE volunteer_tracker;
