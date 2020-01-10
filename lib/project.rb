@@ -35,15 +35,19 @@ class Project
   end
 
   def volunteers
-   volunteers = DB.exec("SELECT * FROM volunteers WHERE project_id = #{@id};")
-   volunteers.map do |element|
-     Volunteer.find(element.fetch('id'))
-   end
- end
+    volunteers = DB.exec("SELECT * FROM volunteers WHERE project_id = #{@id};")
+    volunteers.map do |element|
+      Volunteer.find(element.fetch('id'))
+    end
+  end
 
- def update(title)
-  @title = title.fetch(:title)
-  DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
-end
+  def update(title)
+    @title = title.fetch(:title)
+    DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+  end
+
+  def delete
+    DB.exec("DELETE FROM projects WHERE id = #{@id};")
+  end
 
 end
