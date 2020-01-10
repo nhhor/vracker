@@ -34,4 +34,11 @@ class Project
     Project.new({:title => title, :id => id})
   end
 
+  def volunteers
+   volunteers = DB.exec("SELECT * FROM volunteers WHERE project_id = #{@id};")
+   volunteers.map do |element|
+     Volunteer.find(element.fetch('id'))
+   end
+ end
+
 end
