@@ -100,10 +100,9 @@ end
 
 post('/volunteers') do
   @name = params[:volunteer_name]
-  @project_id = nil
-
-  volunteer = Volunteer.new({:name => @name, :project_id => @project_id, :id => nil})
-  # biunding.pry
+  @project_id = params[:project_id]
+  volunteer = Volunteer.new({:name => @name, :project_id => 0, :id => nil})
+  # binding.pry
   volunteer.save()
   redirect to("/volunteers")
 
