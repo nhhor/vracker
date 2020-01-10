@@ -35,6 +35,7 @@ end
 
 get('/projects/:id') do
   @project = Project.find(params[:id].to_i())
+  # binding.pry
   erb(:project)
 end
 
@@ -84,13 +85,24 @@ get('/volunteer/new') do
 end
 
 get('/volunteers/:id') do
-  @volunteers = Volunteer.find(params[:id].to_i())
-  if @volunteers != nil
-    erb(:volunteer)
+  @volunteer = Volunteer.find(params[:id].to_i())
+  erb(:volunteer)
 
-  else
-    erb(:book_error)
-  end
+
+
+  # get ('/albums/:id') do
+  #   @album = Album.find(params[:id].to_i())
+  #   if @album != nil
+  #     erb(:album)
+  #   else
+  #     erb(:album_error)
+  #   end
+  #   # erb(:album)
+  # end
+
+
+
+
 end
 
 get('/volunteers/:id/edit') do
