@@ -1,0 +1,27 @@
+body {
+  background-color: rgba(146, 221, 255, 1);
+}
+
+h1 {
+  font-family: serif;
+  font-style: oblique;
+  text-align: center;
+  color: rgba(3, 68, 96, 1);
+}
+
+.centerAlign {
+  text-align: center;
+}
+
+/*
+text
+rgba(3, 68, 96, 1)
+shade
+rgba(15, 86, 129, 1)
+pri
+rgba(68, 139, 182, 1)
+tint
+rgba(146, 221, 255, 1)
+comp
+rgba(187, 116, 73, 1)
+ */

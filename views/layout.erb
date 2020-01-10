@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vracker</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Vracker</h1>
+    <p class="centerAlign">A Volunteer Tracking Database [in Ruby & SQL]</p>
+    <hr>
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-4">
+        <a href="/projects"><p class="btn-lg btn-warning">Projects</p></a>
+      </div>
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-4">
+        <a href="/volunteers"><p class="btn-lg btn-danger">Volunteers</p></a>
+      </div>
+      <div class="col-md-1">
+      </div>
+    </div>
+    <HR>
+      <%= yield %>
+    </div>
+  </body>
+  </html>
