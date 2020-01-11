@@ -27,12 +27,32 @@ class Project
     projects
   end
 
+# ORIG
   def self.find(id)
-    project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
-    title = project.fetch("title")
-    id = project.fetch("id").to_i
+    @project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
+    title = @project.fetch("title")
+    id = @project.fetch("id").to_i
     Project.new({:title => title, :id => id})
   end
+
+
+# NEW???
+  # def self.find(id)
+  #   project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
+  #   # binding.pry
+  #   if project
+  #     title = project.fetch("title")
+  #     id = project.fetch("id").to_i
+  #     Project.new({:title => title, :id => id})
+  #   else
+  #     nil
+  #   end
+  # end
+
+
+
+
+
 
   def volunteers
     volunteers = DB.exec("SELECT * FROM volunteers WHERE project_id = #{@id};")
@@ -42,9 +62,23 @@ class Project
   end
 
   def update(title)
+    # binding.pry
     @title = title.fetch(:title)
     DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+
   end
+
+  def update(attributes)
+    if (attributes.is_a? String)
+      @title = attributes
+      DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+    else
+  @title = title.fetch(:title)
+  DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+    end
+  end
+
+
 
   def delete
     DB.exec("DELETE FROM projects WHERE id = #{@id};")

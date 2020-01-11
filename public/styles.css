@@ -23,6 +23,7 @@ p {
 
 .centerAlign {
   text-align: center;
+  text-decoration: overline;
 }
 
 /*

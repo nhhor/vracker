@@ -52,13 +52,27 @@ get('/projects/:id/edit') do
   erb(:edit_project)
 end
 
-patch('/projects/:id') do
+# patch('/projects/:id') do
+#   # binding.pry
+#   @project = Project.find(params[:id].to_i())
+#   # values = *params.values
+#
+#   # project.update({:title => 'Teaching Ruby to Kids', :id => nil})
+#
+#   @project.update(params[:title])
+#   @projects = Project.all
+#   erb(:projects)
+# end
+
+
+
+patch ('/projects/:id') do
+  
   @project = Project.find(params[:id].to_i())
-  values = *params.values
-  @project.update(values[1], values[2], values[3], values[4])
-  @projects = Project.all
-  erb(:projects)
+  @project.update(params[:title])
+  redirect to("/projects/#{params[:id]}")
 end
+
 
 delete('/projects/:id') do
   @project = Project.find(params[:id].to_i())
@@ -67,7 +81,9 @@ delete('/projects/:id') do
   erb(:projects)
 end
 
+
 # VOLUNTEER ROUTES
+
 
 get('/volunteers') do
   if params["search"]
