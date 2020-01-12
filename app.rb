@@ -12,7 +12,7 @@ get('/') do
   # DB.exec('DELETE FROM volunteers *;')
   # DB.exec('DELETE FROM projects *;')
   @projects = Project.all
-  @volunteers = Volunteer.all
+  # @volunteers = Volunteer.all
   erb(:projects)
 end
 
@@ -67,7 +67,7 @@ end
 
 
 patch ('/projects/:id') do
-  
+
   @project = Project.find(params[:id].to_i())
   @project.update(params[:title])
   redirect to("/projects/#{params[:id]}")
@@ -100,10 +100,27 @@ get('/volunteer/new') do
   erb(:new_volunteer)
 end
 
-get('/volunteers/:id') do
-  @volunteer = Volunteer.find(params[:id].to_i())
+get('/projects/:id/volunteers/:volunteer_id') do
+  @volunteer = Volunteer.find(params[:volunteer_id].to_i())
+  # if @volunteer != nil
+  #   erb(:volunteer)
+  # else
+  #   @project = Project.find(params[:id].to_i())
+  #   erb(:project_error)
+  # end
   erb(:volunteer)
 
+
+# get ('/projects/:id/volunteers/:song_id') do
+#   @song = Song.find(params[:song_id].to_i())
+#   if @song != nil
+#     erb(:song)
+#   else
+#     @album = Album.find(params[:id].to_i())
+#     erb(:album_error)
+#   end
+#   # erb(:song)
+# end
 
 
   # get ('/albums/:id') do
@@ -126,15 +143,23 @@ get('/volunteers/:id/edit') do
   erb(:edit_volunteer)
 end
 
-post('/volunteers') do
-  @name = params[:volunteer_name]
-  @project_id = params[:project_id]
-  volunteer = Volunteer.new({:name => @name, :project_id => 0, :id => nil})
-  # binding.pry
-  volunteer.save()
-  redirect to("/volunteers")
+# post('/projects/:id/volunteers') do
+#   @name = params[:volunteer_name]
+#   @project_id = params[:project_id]
+#   volunteer = Volunteer.new({:name => @name, :project_id => 0, :id => nil})
+#   # binding.pry
+#   volunteer.save()
+#   redirect to("/volunteers")
+# end
 
+post ('/projects/:id/volunteers') do
+  @name = params[:volunteer_name]
+  @project = Project.find(params[:id].to_i())
+  volunteer = Volunteer.new({:name => params[:volunteer_name], :project_id => @project.id, :id => nil})
+  volunteer.save()
+  erb(:project)
 end
+
 
 post('/volunteers/:id') do
   if params[:book_name]

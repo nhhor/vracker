@@ -1,18 +1,20 @@
-<h2>Volunteer Name: <%= @volunteer.name %></h2>
 
-<h3>Volunteer Volunteers</h3>
+<h2>Project: <%= @volunteer.project.title %> <br> Volunteer: <%= @volunteer.name %></h2>
+<h2></h2>
 
+<form action="/projects/<%= @volunteer.project.id %>/volunteers/<%= @volunteer.id %>" method="post">
+  <input name="_method" type="hidden" value="patch">
 
+  <label for="name">Rename volunteer</label>
+  <input id="name" name="name" type="text">
 
-<form action="/volunteers/<%= @volunteer.id %>" method="post">
-  <div class="form-group">
-    <label for="volunteer_name">Volunteer name</label>
-    <input id="volunteer_name" name="volunteer_name" class="form-control" type="text" required>
-  </div>
-  <button type="submit" class="btn">Add volunteer</button>
+  <button type="submit">Update volunteer</button>
 </form>
 
+<form action="/projects/<%= @volunteer.project.id %>/volunteers/<%= @volunteer.id %>" method="post">
+  <input name="_method" type="hidden" value="delete">
 
+  <button type="submit">Delete volunteer</button>
+</form>
 
-<p><a href="/volunteers/<%= @volunteer.id %>/edit">Edit project</a></p>
-<p><a href="/volunteers">Return to volunteers list</a></p>
+<a href="/projects/<%= @volunteer.project.id %>">Back to <%= @volunteer.project.title %></a>
