@@ -21,10 +21,6 @@ class Volunteer
     end
   end
 
-
-
-
-
   def self.all
     returned_volunteers = DB.exec("SELECT * FROM volunteers;")
     volunteers = []
@@ -37,29 +33,18 @@ class Volunteer
     volunteers
   end
 
-  # def self.find(id)
-  #   @volunteer = DB.exec("SELECT * FROM volunteers WHERE id = #{id};").first
-  #   name = @volunteer.fetch("name")
-  #   project_id = @volunteer.fetch("project_id").to_i
-  #   id = @volunteer.fetch("id").to_i
-  #   Volunteer.new({:name => name, :project_id => project_id, :id => id})
-  # end
-
   def self.find(id)
-     @volunteer = DB.exec("SELECT * FROM volunteers WHERE id = #{id};").first
-     if @volunteer
-       name = @volunteer.fetch("name")
-       project_id = @volunteer.fetch("project_id").to_i
-       id = @volunteer.fetch("id").to_i
-       Volunteer.new({:name => name, :project_id => project_id, :id => id})
-     else
-       nil
-     end
-   end
-
-
-
-
+    @volunteer = DB.exec("SELECT * FROM volunteers WHERE id = #{id};").first
+    if @volunteer
+      name = @volunteer.fetch("name")
+      project_id = @volunteer.fetch("project_id").to_i
+      id = @volunteer.fetch("id").to_i
+      Volunteer.new({:name => name, :project_id => project_id, :id => id})
+    else
+      nil
+    end
+  end
+  
   def update(name, project_id)
     @name = name
     @project_id = project_id
@@ -71,7 +56,7 @@ class Volunteer
   end
 
   def project
-     Project.find(@project_id)
- end
+    Project.find(@project_id)
+  end
 
 end
