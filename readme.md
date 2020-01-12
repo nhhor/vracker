@@ -1,5 +1,5 @@
 # Application: **Vracker**
-**A Ruby volunt33r_track3r**
+**A Ruby volunteer tracker**
 
 ##### By Noah Horwitz
 
@@ -14,8 +14,9 @@ This application was made as part of a coding project for Noah Horwitz, a studen
 * Click the `Clone or download` button and copy the link.
 * Open your terminal application (assuming **GIT Scripts** and **node.js** (with NPM), **psql**, and **Ruby 2.5.1** have been installed on your system) and type `git clone (link)`.
 * In the terminal using the `cd`... command, navigate to the newly created repository and run `bundle install`.
-* Then in the terminal, run `app.rb`.
-
+* In the terminal type `rake create[volunteer_tracker]`
+* Next, in the terminal, run `app.rb`.
+* Finally, in a browser navigate to `localhost:4567/`
 
 ## Technologies Used
 > `Ruby`
@@ -34,10 +35,21 @@ This application was made as part of a coding project for Noah Horwitz, a studen
 ## Known Bugs
 * None
 
-## Behavior Driven Development Specifications
+## User Stories
+* As a non-profit employee, I want to view, add, update and delete projects.
+* As a non-profit employee, I want to view and add volunteers.
+* As a non-profit employee, I want to add volunteers to a project.
 
+## Behavior Driven Development Specifications
 |Spec|Input|Output|
 |-|-|-|
+|User should be able to **C**reate new projects in the app and it will display (**R**ead) all projects entered.|Fill_in Project name: `Project1`, click_on `Create Project`|Project1|
+|User should be able to **U**pdate existing project(s).|click_on `Project1`, fill_in Rename project: `project_A`, click_on `Update Project`| ProjectA|
+|User should be able to **D**elete existing project(s).|... click_on `Delete Project`| _There are currently no records to display._|
+||||
+|User should be able to click on a created project and in the resulting view be able to **C**reate a new volunteer for that project and it will display (**R**ead) all volunteers entered.|... click_on `Project2`, fill_in `Volunteer1`, click_on `Add volunteer` |Project Name: _Project2_, Project volunteers: _Volunteer1_|
+|User should be able to click on a created volunteer and add in the resulting view be able to **U**pdate the volunteer.|... click_on `Volunteer1`, fill_in `VolunteerA`, click_on `Update volunteer` |Project Name: Project2, Project volunteers: _VolunteerA_|
+|User should be able to click on a created volunteer and add in the resulting view be able to **D**elete the volunteer.|... click_on `VolunteerA`, click_on `Delete volunteer` |Current volunteers _[none]_|
 ||||
 
 ## References

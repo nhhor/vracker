@@ -22,7 +22,7 @@ class Volunteer
   end
 
   def self.all
-    returned_volunteers = DB.exec("SELECT * FROM volunteers;")
+    returned_volunteers = DB.exec("SELECT * FROM volunteers ORDER BY name ASC;")
     volunteers = []
     returned_volunteers.each() do |volunteer|
       name = volunteer.fetch("name")
@@ -44,7 +44,7 @@ class Volunteer
       nil
     end
   end
-  
+
   def update(name, project_id)
     @name = name
     @project_id = project_id

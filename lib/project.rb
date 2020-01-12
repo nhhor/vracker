@@ -17,7 +17,7 @@ class Project
   end
 
   def self.all
-    returned_projects = DB.exec("SELECT * FROM projects;")
+    returned_projects = DB.exec("SELECT * FROM projects ORDER BY title ASC;")
     projects = []
     returned_projects.each() do |project|
       title = project.fetch("title")
@@ -29,7 +29,6 @@ class Project
 
   def self.find(id)
     project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
-    # binding.pry
     if project
       title = project.fetch("title")
       id = project.fetch("id").to_i
@@ -59,7 +58,6 @@ class Project
   def delete
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
     DB.exec("DELETE FROM volunteers WHERE project_id = #{@id};")
-
   end
 
 end
