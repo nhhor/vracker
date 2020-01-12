@@ -67,8 +67,7 @@ end
 
 
 patch ('/projects/:id') do
-
-  @project = Project.find(params[:id].to_i())
+    @project = Project.find(params[:id].to_i())
   @project.update(params[:title])
   redirect to("/projects/#{params[:id]}")
 end
@@ -96,52 +95,26 @@ get('/volunteers') do
   erb(:volunteers)
 end
 
-get('/volunteer/new') do
-  erb(:new_volunteer)
-end
+# get('/volunteer/new') do
+#   erb(:new_volunteer)
+# end
 
 get('/projects/:id/volunteers/:volunteer_id') do
   @volunteer = Volunteer.find(params[:volunteer_id].to_i())
-  # if @volunteer != nil
-  #   erb(:volunteer)
-  # else
-  #   @project = Project.find(params[:id].to_i())
-  #   erb(:project_error)
-  # end
-  erb(:volunteer)
+  if @volunteer != nil
+    erb(:volunteer)
+  else
+    @project = Project.find(params[:id].to_i())
+    erb(:project_error)
+  end
+  # erb(:song)
+end
 
 
-# get ('/projects/:id/volunteers/:song_id') do
-#   @song = Song.find(params[:song_id].to_i())
-#   if @song != nil
-#     erb(:song)
-#   else
-#     @album = Album.find(params[:id].to_i())
-#     erb(:album_error)
-#   end
-#   # erb(:song)
+# get('/volunteers/:id/edit') do
+#   @volunteers = Volunteer.find(params[:id].to_i())
+#   erb(:edit_volunteer)
 # end
-
-
-  # get ('/albums/:id') do
-  #   @album = Album.find(params[:id].to_i())
-  #   if @album != nil
-  #     erb(:album)
-  #   else
-  #     erb(:album_error)
-  #   end
-  #   # erb(:album)
-  # end
-
-
-
-
-end
-
-get('/volunteers/:id/edit') do
-  @volunteers = Volunteer.find(params[:id].to_i())
-  erb(:edit_volunteer)
-end
 
 # post('/projects/:id/volunteers') do
 #   @name = params[:volunteer_name]
@@ -161,30 +134,31 @@ post ('/projects/:id/volunteers') do
 end
 
 
-post('/volunteers/:id') do
-  if params[:book_name]
-    name = params[:book_name]
-    id = params[:id]
-    # binding.pry
-    @volunteers = Volunteer.find(params[:id].to_i())
-    @volunteers.update({:book_name => name})
-    redirect to("/volunteers/#{params[:id]}")
-  elsif params[:book_id]
-    @volunteers = Volunteer.find(params[:id].to_i())
-    @volunteers.return_book(params[:book_id].to_i)
-    redirect to("/volunteers/#{params[:id]}")
-  end
+# post('/volunteers/:id') do
+#   if params[:book_name]
+#     name = params[:book_name]
+#     id = params[:id]
+#     # binding.pry
+#     @volunteers = Volunteer.find(params[:id].to_i())
+#     @volunteers.update({:book_name => name})
+#     redirect to("/volunteers/#{params[:id]}")
+#   elsif params[:book_id]
+#     @volunteers = Volunteer.find(params[:id].to_i())
+#     @volunteers.return_book(params[:book_id].to_i)
+#     redirect to("/volunteers/#{params[:id]}")
+#   end
+#
+# end
 
+patch('/projects/:id/volunteers/:volunteer_id') do
+  @project = Project.find(params[:id].to_i())
+  @volunteer = Volunteer.find(params[:volunteer_id].to_i())
+  @volunteer.update(params[:name], @project.id)
+  redirect to("/projects/#{params[:id]}/volunteers/#{params[:volunteer_id]}")
 end
 
-patch('/volunteers/:id') do
-  @volunteers = Volunteer.find(params[:id].to_i())
-  @volunteers.update(params[:name])
-  redirect to("/volunteers/#{params[:id]}")
-end
-
-delete('/volunteers/:id') do
-  @volunteers = Volunteer.find(params[:id].to_i())
+delete('/projects/:id/volunteers/:volunteer_id') do
+  @volunteers = Volunteer.find(params[:volunteer_id].to_i())
   @volunteers.delete()
-  redirect to('/volunteers')
+  redirect to('/projects')
 end
