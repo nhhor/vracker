@@ -49,11 +49,6 @@ class Project
   #   end
   # end
 
-
-
-
-
-
   def volunteers
     volunteers = DB.exec("SELECT * FROM volunteers WHERE project_id = #{@id};")
     volunteers.map do |element|
@@ -61,24 +56,15 @@ class Project
     end
   end
 
-  def update(title)
-    # binding.pry
-    @title = title.fetch(:title)
-    DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
-
-  end
-
   def update(attributes)
     if (attributes.is_a? String)
       @title = attributes
       DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
     else
-  @title = title.fetch(:title)
-  DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+      @title = attributes.fetch(:title)
+      DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
     end
   end
-
-
 
   def delete
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
